@@ -1,6 +1,9 @@
 name: AI Powered Build Log Summary
 
 on:
+  push:
+    branches:
+      - 'dev'
   pull_request:
     types: [opened, synchronized, reopened, edited]
     branches:
