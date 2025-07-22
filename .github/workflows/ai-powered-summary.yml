@@ -27,6 +27,7 @@ jobs:
       - name: Install Python dependencies
         run: |
           ls
+          cat build_log.txt
           pip install openai
 
       - name: Parse Summarize Build Log

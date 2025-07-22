@@ -7,6 +7,7 @@ import openai
 # This function parses the log file and returns the contents between the start and end tags
 def parse_log_file(log_file):
     # Start parsing the log file
+    print(log_file)
     start_parsing_tag = "Start log summary"
     end_parsing_tag = "End log summary"
     
