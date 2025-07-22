@@ -5,10 +5,7 @@ on:
     types: [opened, synchronized, reopened, edited]
     branches:
       - 'dev'
-  puah:
-    branches:
-      - 'main'
-
+  
 jobs:
   build:
     runs-on: ubuntu-latest
