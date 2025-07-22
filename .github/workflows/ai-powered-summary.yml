@@ -27,10 +27,12 @@ jobs:
       - name: Install Python dependencies
         run: |
           ls
-          pip install openai
+          pip install requests
+          pip install json
+
 
       - name: Parse Summarize Build Log
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_TEST_KEY }}
-        run: python3 scripts/parse_log_and_summarise.py build_log.txt
+        run: python3 scripts/perplex.py build_log.txt
 
