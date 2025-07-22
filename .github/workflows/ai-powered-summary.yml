@@ -25,10 +25,12 @@ jobs:
           python-version: '3.x'
 
       - name: Install Python dependencies
-        run: pip install openai
+        run: |
+          ls
+          pip install openai
 
       - name: Parse Summarize Build Log
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_TEST_KEY }}
-        run: python3 scripts/parse_log_and_summarise.py build-log.txt
+        run: python3 scripts/parse_log_and_summarise.py build_log.txt
 
