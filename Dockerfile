@@ -1,5 +1,5 @@
 FROM ubuntu:latest
-echo "Start log summary"
+
 # build/test steps here
 
 
