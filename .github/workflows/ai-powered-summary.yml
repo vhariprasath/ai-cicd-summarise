@@ -10,6 +10,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+      - name: build-image
+        run: docker build --no-cache --progress=plain . -t test-image &> build_log.txt
 
       - name: Set up Python 3
         uses: actions/setup-python@v2
@@ -19,18 +21,8 @@ jobs:
       - name: Install Python dependencies
         run: pip install openai
 
-      - name: Build and log summary markers
-        run: |
-          echo "start log summary"
-          # Your build steps here, e.g.:
-          curl --version
-          kubectl version --client
-          helm version
-          echo "end log summary"
-        shell: bash | tee build-log.txt
-
       - name: Parse Summarize Build Log
         env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: python3 scripts/summarize.py build-log.txt
+          OPENAI_API_KEY: ${{ secrets.OPENAI_TEST_KEY }}
+        run: python3 scripts/parse_log_and_summarise.py build-log.txt
 
