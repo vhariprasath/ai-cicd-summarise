@@ -15,7 +15,7 @@ def parse_log_file(log_file):
         lines = f.readlines()
         if start_parsing_tag in lines:
             start_index = lines.index(start_parsing_tag)
-        else if end_parsing_tag in lines:
+        elif end_parsing_tag in lines:
             end_index = lines.index(end_parsing_tag)
 
         # Get the log file contents between the start and end tags
