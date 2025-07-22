@@ -10,6 +10,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        
       - name: build-image
         run: docker build --no-cache --progress=plain . -t test-image &> build_log.txt
 
