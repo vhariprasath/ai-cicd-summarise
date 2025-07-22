@@ -5,7 +5,7 @@ on:
     types: [opened, synchronized, reopened, edited]
     branches:
       - 'dev'
-   push:
+  puah:
     branches:
       - 'main'
 
