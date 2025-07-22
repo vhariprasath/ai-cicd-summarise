@@ -5,6 +5,9 @@ on:
     types: [opened, synchronized, reopened, edited]
     branches:
       - 'dev'
+   push:
+    branches:
+      - 'main'
 
 jobs:
   build:
