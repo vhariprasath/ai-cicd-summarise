@@ -13,6 +13,8 @@ def parse_log_file(log_file):
     
     # Read the log file
     with open(log_file, 'r') as f:
+        start_index = None
+        end_index = None
         lines = f.readlines()
         if start_parsing_tag in lines:
             start_index = lines.index(start_parsing_tag)
