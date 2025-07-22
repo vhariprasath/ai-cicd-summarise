@@ -1,0 +1,36 @@
+name: AI Powered Build Log Summary
+
+on:
+  pull_request:
+    types: [opened, synchronized, reopened, edited]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install Python dependencies
+        run: pip install openai
+
+      - name: Build and log summary markers
+        run: |
+          echo "start log summary"
+          # Your build steps here, e.g.:
+          curl --version
+          kubectl version --client
+          helm version
+          echo "end log summary"
+        shell: bash | tee build-log.txt
+
+      - name: Parse Summarize Build Log
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: python3 scripts/summarize.py build-log.txt
+
