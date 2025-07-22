@@ -28,8 +28,6 @@ jobs:
         run: |
           ls
           pip install requests
-          pip install json
-
 
       - name: Parse Summarize Build Log
         env:
