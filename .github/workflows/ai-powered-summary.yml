@@ -6,8 +6,6 @@ on:
       - 'dev'
   pull_request:
     types: [opened, synchronized, reopened, edited]
-    branches:
-      - 'dev'
   
 jobs:
   build:
@@ -36,11 +34,12 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_TEST_KEY }}
         run: python3 scripts/perplex.py build_log.txt
 
-      - name:  Comment on PR
+      - name: Comment on PR
         uses: peter-evans/create-or-update-comment@v4
         with:
-          issue-number: 1
+          issue-number: ${{ github.event.pull_request.number }}
           body-path: summary.txt
           reactions: '+1'
           token: ${{ secrets.GITHUB_TOKEN }}
+
 
