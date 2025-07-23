@@ -36,3 +36,10 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_TEST_KEY }}
         run: python3 scripts/perplex.py build_log.txt
 
+      - name:  Comment on PR
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          issue-number: ${{github.event.pull_request.number}}
+          body-path: summary.txt
+          reactions: '+1'
+
