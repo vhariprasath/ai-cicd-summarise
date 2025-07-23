@@ -39,7 +39,7 @@ jobs:
       - name:  Comment on PR
         uses: peter-evans/create-or-update-comment@v4
         with:
-          issue-number: ${{ github.event.number}}
+          issue-number: 1
           body-path: summary.txt
           reactions: '+1'
           token: ${{ secrets.GITHUB_TOKEN }}
