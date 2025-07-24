@@ -3,6 +3,8 @@ name: AI Powered Build Log Summary
 on:
   pull_request:
     types: [opened, synchronized, reopened, edited]
+    branches:
+      - 'releases/**'
   
 jobs:
   build:
