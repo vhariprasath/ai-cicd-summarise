@@ -1,11 +1,11 @@
 name: AI Powered Build Log Summary
 
 on:
-  pull_request:
-    types: [opened, synchronized, reopened, edited]
+  push:
     branches:
       - 'dev'
-
+  pull_request:
+    types: [opened, synchronized, reopened, edited]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -14,7 +14,9 @@ jobs:
         uses: actions/checkout@v3
 
       - name: build-image
-        run: docker build --no-cache --progress=plain . -t test-image &> build_log.txt
+        run: |
+          docker build --no-cache --progress=plain . -t test-image &> build_log.txt
+          cat build_log.txt
 
       - name: Set up Python 3
         uses: actions/setup-python@v2
@@ -22,10 +24,21 @@ jobs:
           python-version: '3.x'
 
       - name: Install Python dependencies
-        run: pip install openai
+        run: |
+          ls
+          pip install requests
 
       - name: Parse Summarize Build Log
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_TEST_KEY }}
-        run: python3 scripts/parse_log_and_summarise.py build-log.txt
+        run: python3 scripts/perplex.py build_log.txt
+
+      - name: Comment on PR
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body-path: summary.txt
+          reactions: '+1'
+          token: ${{ secrets.GITHUB_TOKEN }}
+
 
